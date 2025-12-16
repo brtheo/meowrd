@@ -35,9 +35,12 @@ const app = new Elysia()
 		`
 	})
 	.post('/create-room', ctx => {
-		const {roomName} = ctx.body
-		console.log(ctx)
-		return ctx.redirect(`/chat/${roomName}`)
+		const {roomId} = ctx.body
+		return ctx.redirect(`/chat/${roomId}`)
+	}, {
+		body: t.Object({
+			roomId: t.String()
+		})
 	})
 	.get('/chat/:roomId', ctx => ctx.html`
 		<chat-room .roomId=${ctx.params.roomId}>

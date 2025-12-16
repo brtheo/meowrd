@@ -23,7 +23,7 @@ export class CreateRoom extends LitElement {
   render() {
     return html`
       <form hx-post="/create-room" hx-swap="innerHTML" hx-target="body" hx-replace-url=${this.chatURL}>
-        <input type="text" name="roomName" @change=${this.handleChange} .value=${this.roomName} placeholder="Enter a room name">
+        <input type="text" name="roomId" @change=${this.handleChange} .value=${this.roomName} placeholder="Enter a room name">
       </form>
     `
   }
