@@ -1,4 +1,4 @@
-import { LitElement, css, html, adoptStyles, type PropertyValues, TemplateResult } from 'lit'
+import { LitElement, html } from 'lit'
 import { customElement, state } from 'lit/decorators.js'
 import { action, type ActionResult } from '@/lib/action';
 import type { CreateActionParams } from './CreateRoom.server';
@@ -16,10 +16,8 @@ export class CreateRoom extends LitElement {
 
   async roomCreation(e: SubmitEvent) {
     e.preventDefault()
-    const fragment = await this.create({roomName: this.roomName});
-
-    history.pushState({pageID: this.pageDetail}, this.pageDetail, this.chatURL);
-    document.body.innerHTML = fragment;
+    await this.create({roomName: this.roomName});
+    location.assign(this.chatURL)
   }
 
   render() {

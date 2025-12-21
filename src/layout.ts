@@ -1,5 +1,4 @@
-import type { HTMLTemplateResult } from 'lit'
-import { html } from 'lit'
+import { type HTMLTemplateResult, html } from 'lit'
 
 export default (body: HTMLTemplateResult) =>
 	html`<html lang="en">
@@ -13,7 +12,39 @@ export default (body: HTMLTemplateResult) =>
 				:root{
 					background-color: #323232;
 					color: #fefefe;
-				}
+
+					
+
+            /* Your Palette */
+            --c-purple: #AD46FF;
+            --c-deep-blurple: #4F39F6;
+            --c-bright-blue: #155DFC;
+            --c-pink: #FB64B6;
+            
+            /* Discord-esque Dark Greys */
+            --bg-dark-1: #202225; /* Server list strip */
+            --bg-dark-2: #2F3136; /* Sidebar */
+            --bg-dark-3: #36393F; /* Main chat */
+            --bg-dark-4: #40444B; /* Input/Hover */
+            
+            --text-header: #FFFFFF;
+            --text-normal: #DCDDDE;
+            --text-muted: #72767D;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "gg sans", "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+				body {
+            background-color: var(--bg-dark-3);
+            color: var(--text-normal);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
 			</style>
 			<!-- <script>
         const socket = new WebSocket("ws://localhost:3000");

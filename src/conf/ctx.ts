@@ -1,10 +1,8 @@
-import Elysia from 'elysia'
-// import { Database } from 'bun:sqlite'
-import { collectResult } from '@lit-labs/ssr/lib/render-result'
-import { render } from '@lit-labs/ssr'
-import { HTMLTemplateResult } from 'lit'
-import Layout from './layout'
-import { html } from 'lit'
+import Elysia from 'elysia';
+import { collectResult } from '@lit-labs/ssr/lib/render-result';
+import { render } from '@lit-labs/ssr';
+import { HTMLTemplateResult, html } from 'lit';
+import Layout from '@/layout';
 
 // const db = new Database('database.sqlite')
 // db.exec("CREATE TABLE IF NOT EXISTS counter('count' INT);")

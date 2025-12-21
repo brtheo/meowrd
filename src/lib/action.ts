@@ -1,7 +1,5 @@
 
-import { isServer, type ReactiveControllerHost} from "lit";
-import {Task} from '@lit/task';
-import { HTTPMethod } from "elysia";
+import { isServer } from "lit";
 
 type HTTPVerb = 'get' | 'post' | 'put' | 'patch';
 type ActionReturnType = 'JSON' | 'HTML';
@@ -20,6 +18,8 @@ type ActionEndpoint = {
 };
 export type ActionResult<T extends Object,K> = (args?: T) => Promise<K>;
 
+
+export const SERVER_ACTIONS_PREFIX = 'server-actions';
 export const actionEndpoints: ActionEndpoint[] = [];
 
 export const action: ActionDecorator = ({ httpVerb = 'get', returnType = 'JSON'} = {}) => 
@@ -37,7 +37,7 @@ export const action: ActionDecorator = ({ httpVerb = 'get', returnType = 'JSON'}
     Object.defineProperty(proto, actionName, {
       get: () => async (args) => {
         const query = parseArgs(args ?? {});
-        const response = await fetch(`/servercomponents/${componentName}/${actionName.toLowerCase()}${query}`, {
+        const response = await fetch(`/${SERVER_ACTIONS_PREFIX}/${componentName}/${actionName.toLowerCase()}${query}`, {
           method: httpVerb
         });
         switch(returnType) {
