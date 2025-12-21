@@ -1,2 +1,2 @@
-import './components/createRoom';
-import './components/chatRoom';
+import './components/CreateRoom/CreateRoom';
+import './components/ChatRoom';

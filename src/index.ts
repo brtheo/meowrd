@@ -1,10 +1,9 @@
 import build from '~/macros/build' assert { type: 'macro' }
 import { Elysia, t, type Static } from 'elysia'
 import { staticPlugin } from '@elysiajs/static'
-// import { SWCRouter } from '~/lib/lit-server-components'
-import { html } from 'lit'
-import { map } from 'lit/directives/map.js'
 import { context } from './ctx'
+import '@/web/registerComponents'
+import serverActions from './lib/actionEndpoints'
 
 const MessagePayload = t.Object({
   user: t.String(),
@@ -17,17 +16,15 @@ const RoomMessage = t.Object({
   message: t.String(),
   roomId: t.String(),
 });
+
 export type Message = Static<typeof RoomMessage>
-import '@/web/registerComponents'
 
 await build()
 
-
-
 const app = new Elysia()
 	.use(staticPlugin())
+	.use(serverActions)
 	.use(context)
-	// .use(context)
 	.get('/', (ctx) => {
 		return ctx.html`
 			<h1>hello world oui je fais</h1>
@@ -45,7 +42,6 @@ const app = new Elysia()
 	.get('/chat/:roomId', ctx => ctx.html`
 		<chat-room .roomId=${ctx.params.roomId}>
 		</chat-room>
-		
 	`)
   .ws('/chat', {
 		query: t.Object({

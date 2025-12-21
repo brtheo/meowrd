@@ -11,20 +11,20 @@
     // "disableReferencedProjectLoad": true,             /* Reduce the number of projects loaded automatically by TypeScript. */
 
     /* Language and Environment */
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ES2022", "DOM"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "useDefineForClassFields": true,
-    "target": "ESNext",
+    "useDefineForClassFields": false,
+    "target": "es2022",
     "module": "ESNext",    
     "moduleResolution": "bundler",                       
     "strictPropertyInitialization": false,               
     "types": ["bun-types"],                                      
     "esModuleInterop": true,                             
-    "forceConsistentCasingInFileNames": true,            
+    "forceConsistentCasingInFileNames": true,
+    "alwaysStrict": true,            
     "strict": true,                                 
     "skipLibCheck": true,
-    "plugins": [{ "name": "ts-lit-plugin" }],
     "paths": {
       "@/*": ["./src/*"],
       "~/*": ["./*"]

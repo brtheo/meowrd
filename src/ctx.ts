@@ -11,21 +11,35 @@ import { html } from 'lit'
 
 
 const lithtml = async (strings: TemplateStringsArray, ...values: unknown[]) => {
-		return new Response(
-      await collectResult(
-        render(
-          Layout(
-            html(strings, ...values)
-          )
-        )
-      ), 
-      {
-        headers: {
-          'Content-Type': 'text/html',
-        }
-		  }
-    )
-	}
+	return new Response(
+		await collectResult(
+			render(
+				Layout(
+					html(strings, ...values)
+				)
+			)
+		), 
+		{
+			headers: {
+				'Content-Type': 'text/html',
+			}
+		}
+	)
+}
+const fragment = async (strings: TemplateStringsArray, ...values: unknown[]) => {
+	return new Response(
+		await collectResult(
+			render(
+				html(strings, ...values)
+			)
+		), 
+		{
+			headers: {
+				'Content-Type': 'text/html',
+			}
+		}
+	)
+}
 
 export const context = new Elysia({
 	name: '@app/ctx',
@@ -58,6 +72,7 @@ export const context = new Elysia({
     )
 	})
 	.decorate('html', lithtml)
+	.decorate('fragment', fragment)
 	.derive(({ set, headers }) => ({
 		redirect: (href: string) => {
 			if (headers['hx-request'] === 'true') {
