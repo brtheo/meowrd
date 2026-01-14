@@ -22,200 +22,199 @@ Please use the static 'html' tag function. See https://lit.dev/docs/templates/ex
           placeholder="Enter a room name" />
           <button type="submit">test</button>
       </form>
-    `}}__legacyDecorateClassTS([state(),__legacyMetadataTS("design:type",String)],CreateRoom.prototype,"roomName",void 0),__legacyDecorateClassTS([action({returnType:"HTML"}),__legacyMetadataTS("design:type",typeof ActionResult==="undefined"?Object:ActionResult)],CreateRoom.prototype,"create",void 0),CreateRoom=__legacyDecorateClassTS([customElement("create-room")],CreateRoom);var DEV_MODE5=!0,notifyChildrenConnectedChanged=(parent,isConnected)=>{let children=parent._$disconnectableChildren;if(children===void 0)return!1;for(let obj of children)obj._$notifyDirectiveConnectionChanged?.(isConnected,!1),notifyChildrenConnectedChanged(obj,isConnected);return!0},removeDisconnectableFromParent=(obj)=>{let parent,children;do{if((parent=obj._$parent)===void 0)break;children=parent._$disconnectableChildren,children.delete(obj),obj=parent}while(children?.size===0)},addDisconnectableToParent=(obj)=>{for(let parent;parent=obj._$parent;obj=parent){let children=parent._$disconnectableChildren;if(children===void 0)parent._$disconnectableChildren=children=new Set;else if(children.has(obj))break;children.add(obj),installDisconnectAPI(parent)}};function reparentDisconnectables(newParent){if(this._$disconnectableChildren!==void 0)removeDisconnectableFromParent(this),this._$parent=newParent,addDisconnectableToParent(this);else this._$parent=newParent}function notifyChildPartConnectedChanged(isConnected,isClearingValue=!1,fromPartIndex=0){let value=this._$committedValue,children=this._$disconnectableChildren;if(children===void 0||children.size===0)return;if(isClearingValue){if(Array.isArray(value))for(let i=fromPartIndex;i<value.length;i++)notifyChildrenConnectedChanged(value[i],!1),removeDisconnectableFromParent(value[i]);else if(value!=null)notifyChildrenConnectedChanged(value,!1),removeDisconnectableFromParent(value)}else notifyChildrenConnectedChanged(this,isConnected)}var installDisconnectAPI=(obj)=>{if(obj.type==PartType.CHILD)obj._$notifyConnectionChanged??=notifyChildPartConnectedChanged,obj._$reparentDisconnectables??=reparentDisconnectables};class AsyncDirective extends Directive{constructor(){super(...arguments);this._$disconnectableChildren=void 0}_$initialize(part,parent,attributeIndex){super._$initialize(part,parent,attributeIndex),addDisconnectableToParent(this),this.isConnected=part._$isConnected}["_$notifyDirectiveConnectionChanged"](isConnected,isClearingDirective=!0){if(isConnected!==this.isConnected)if(this.isConnected=isConnected,isConnected)this.reconnected?.();else this.disconnected?.();if(isClearingDirective)notifyChildrenConnectedChanged(this,isConnected),removeDisconnectableFromParent(this)}setValue(value){if(isSingleExpression(this.__part))this.__part._$setValue(value,this);else{if(DEV_MODE5&&this.__attributeIndex===void 0)throw Error("Expected this.__attributeIndex to be a number");let newValues=[...this.__part._$committedValue];newValues[this.__attributeIndex]=value,this.__part._$setValue(newValues,this,0)}}disconnected(){}reconnected(){}}var createRef=()=>new Ref;class Ref{}var lastElementForContextAndCallback=new WeakMap;class RefDirective extends AsyncDirective{render(_ref){return nothing}update(part,[ref]){let refChanged=ref!==this._ref;if(refChanged&&this._ref!==void 0)this._updateRefValue(void 0);if(refChanged||this._lastElementForRef!==this._element)this._ref=ref,this._context=part.options?.host,this._updateRefValue(this._element=part.element);return nothing}_updateRefValue(element){if(!this.isConnected)element=void 0;if(typeof this._ref==="function"){let context=this._context??globalThis,lastElementForCallback=lastElementForContextAndCallback.get(context);if(lastElementForCallback===void 0)lastElementForCallback=new WeakMap,lastElementForContextAndCallback.set(context,lastElementForCallback);if(lastElementForCallback.get(this._ref)!==void 0)this._ref.call(this._context,void 0);if(lastElementForCallback.set(this._ref,element),element!==void 0)this._ref.call(this._context,element)}else this._ref.value=element}get _lastElementForRef(){return typeof this._ref==="function"?lastElementForContextAndCallback.get(this._context??globalThis)?.get(this._ref):this._ref?.value}disconnected(){if(this._lastElementForRef===this._element)this._updateRefValue(void 0)}reconnected(){this._updateRefValue(this._element)}}var ref=directive(RefDirective);var generateMap=(list,start,end)=>{let map=new Map;for(let i=start;i<=end;i++)map.set(list[i],i);return map};class RepeatDirective extends Directive{constructor(partInfo){super(partInfo);if(partInfo.type!==PartType.CHILD)throw Error("repeat() can only be used in text expressions")}_getValuesAndKeys(items,keyFnOrTemplate,template){let keyFn;if(template===void 0)template=keyFnOrTemplate;else if(keyFnOrTemplate!==void 0)keyFn=keyFnOrTemplate;let keys=[],values=[],index=0;for(let item of items)keys[index]=keyFn?keyFn(item,index):index,values[index]=template(item,index),index++;return{values,keys}}render(items,keyFnOrTemplate,template){return this._getValuesAndKeys(items,keyFnOrTemplate,template).values}update(containerPart,[items,keyFnOrTemplate,template]){let oldParts=getCommittedValue(containerPart),{values:newValues,keys:newKeys}=this._getValuesAndKeys(items,keyFnOrTemplate,template);if(!Array.isArray(oldParts))return this._itemKeys=newKeys,newValues;let oldKeys=this._itemKeys??=[],newParts=[],newKeyToIndexMap,oldKeyToIndexMap,oldHead=0,oldTail=oldParts.length-1,newHead=0,newTail=newValues.length-1;while(oldHead<=oldTail&&newHead<=newTail)if(oldParts[oldHead]===null)oldHead++;else if(oldParts[oldTail]===null)oldTail--;else if(oldKeys[oldHead]===newKeys[newHead])newParts[newHead]=setChildPartValue(oldParts[oldHead],newValues[newHead]),oldHead++,newHead++;else if(oldKeys[oldTail]===newKeys[newTail])newParts[newTail]=setChildPartValue(oldParts[oldTail],newValues[newTail]),oldTail--,newTail--;else if(oldKeys[oldHead]===newKeys[newTail])newParts[newTail]=setChildPartValue(oldParts[oldHead],newValues[newTail]),insertPart(containerPart,newParts[newTail+1],oldParts[oldHead]),oldHead++,newTail--;else if(oldKeys[oldTail]===newKeys[newHead])newParts[newHead]=setChildPartValue(oldParts[oldTail],newValues[newHead]),insertPart(containerPart,oldParts[oldHead],oldParts[oldTail]),oldTail--,newHead++;else{if(newKeyToIndexMap===void 0)newKeyToIndexMap=generateMap(newKeys,newHead,newTail),oldKeyToIndexMap=generateMap(oldKeys,oldHead,oldTail);if(!newKeyToIndexMap.has(oldKeys[oldHead]))removePart(oldParts[oldHead]),oldHead++;else if(!newKeyToIndexMap.has(oldKeys[oldTail]))removePart(oldParts[oldTail]),oldTail--;else{let oldIndex=oldKeyToIndexMap.get(newKeys[newHead]),oldPart=oldIndex!==void 0?oldParts[oldIndex]:null;if(oldPart===null){let newPart=insertPart(containerPart,oldParts[oldHead]);setChildPartValue(newPart,newValues[newHead]),newParts[newHead]=newPart}else newParts[newHead]=setChildPartValue(oldPart,newValues[newHead]),insertPart(containerPart,oldParts[oldHead],oldPart),oldParts[oldIndex]=null;newHead++}}while(newHead<=newTail){let newPart=insertPart(containerPart,newParts[newTail+1]);setChildPartValue(newPart,newValues[newHead]),newParts[newHead++]=newPart}while(oldHead<=oldTail){let oldPart=oldParts[oldHead++];if(oldPart!==null)removePart(oldPart)}return this._itemKeys=newKeys,setCommittedValue(containerPart,newParts),noChange}}var repeat=directive(RepeatDirective);var s=class extends Error{constructor(e,n){super(n+"");this.status=e,this.value=n}},i=/(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))/,o=/(?:Sun|Mon|Tue|Wed|Thu|Fri|Sat)\s(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s\d{2}\s\d{4}\s\d{2}:\d{2}:\d{2}\sGMT(?:\+|-)\d{4}\s\([^)]+\)/,c=/^(?:(?:(?:(?:0?[1-9]|[12][0-9]|3[01])[/\s-](?:0?[1-9]|1[0-2])[/\s-](?:19|20)\d{2})|(?:(?:19|20)\d{2}[/\s-](?:0?[1-9]|1[0-2])[/\s-](?:0?[1-9]|[12][0-9]|3[01]))))(?:\s(?:1[012]|0?[1-9]):[0-5][0-9](?::[0-5][0-9])?(?:\s[AP]M)?)?$/,u=(t)=>t.trim().length!==0&&!Number.isNaN(Number(t)),d2=(t)=>{if(typeof t!="string")return null;let r=t.replace(/"/g,"");if(i.test(r)||o.test(r)||c.test(r)){let e=new Date(r);if(!Number.isNaN(e.getTime()))return e}return null},a=(t)=>{let r=t.charCodeAt(0),e=t.charCodeAt(t.length-1);return r===123&&e===125||r===91&&e===93},p=(t)=>JSON.parse(t,(r,e)=>{return d2(e)||e}),g=(t)=>{if(!t)return t;if(u(t))return+t;if(t==="true")return!0;if(t==="false")return!1;let r=d2(t);if(r)return r;if(a(t))try{return p(t)}catch{}return t},S=(t)=>{let r=t.data.toString();return r==="null"?null:g(r)};var F=class{constructor(t){this.url=t,this.ws=new WebSocket(t)}ws;send(t){return Array.isArray(t)?(t.forEach((n)=>this.send(n)),this):(this.ws.send(typeof t=="object"?JSON.stringify(t):t.toString()),this)}on(t,n,s2){return this.addEventListener(t,n,s2)}off(t,n,s2){return this.ws.removeEventListener(t,n,s2),this}subscribe(t,n){return this.addEventListener("message",t,n)}addEventListener(t,n,s2){return this.ws.addEventListener(t,(f)=>{if(t==="message"){let o2=S(f);n({...f,data:o2})}else n(f)},s2),this}removeEventListener(t,n,s2){return this.off(t,n,s2),this}close(){return this.ws.close(),this}},J=["get","post","put","delete","patch","options","head","connect","subscribe"],D=["localhost","127.0.0.1","0.0.0.0"],K=typeof FileList>"u",I=(e)=>K?e instanceof Blob:e instanceof FileList||e instanceof File,P=(e)=>{if(!e)return!1;for(let t in e)if(I(e[t])||Array.isArray(e[t])&&e[t].find(I))return!0;return!1},C=(e)=>K?e:new Promise((t)=>{let n=new FileReader;n.onload=()=>{let s2=new File([n.result],e.name,{lastModified:e.lastModified,type:e.type});t(s2)},n.readAsArrayBuffer(e)}),b=(e,t,n={},s2={})=>{if(Array.isArray(e)){for(let f of e)if(!Array.isArray(f))s2=b(f,t,n,s2);else{let o2=f[0];if(typeof o2=="string")s2[o2.toLowerCase()]=f[1];else for(let[i2,h]of o2)s2[i2.toLowerCase()]=h}return s2}if(!e)return s2;switch(typeof e){case"function":if(e instanceof Headers)return b(e,t,n,s2);let f=e(t,n);return f?b(f,t,n,s2):s2;case"object":if(e instanceof Headers)return e.forEach((o2,i2)=>{s2[i2.toLowerCase()]=o2}),s2;for(let[o2,i2]of Object.entries(e))s2[o2.toLowerCase()]=i2;return s2;default:return s2}};async function*U(e){let t=e.body;if(!t)return;let n=t.getReader(),s2=new TextDecoder;try{for(;;){let{done:f,value:o2}=await n.read();if(f)break;let i2=typeof o2=="string"?o2:s2.decode(o2);i2.includes(`
+    `}}__legacyDecorateClassTS([state(),__legacyMetadataTS("design:type",String)],CreateRoom.prototype,"roomName",void 0),__legacyDecorateClassTS([action({returnType:"HTML"}),__legacyMetadataTS("design:type",typeof ActionResult==="undefined"?Object:ActionResult)],CreateRoom.prototype,"create",void 0),CreateRoom=__legacyDecorateClassTS([customElement("create-room")],CreateRoom);class MutationController{constructor(host,{target,config,callback,skipInitial}){if(this._targets=new Set,this._skipInitial=!1,this._unobservedUpdate=!1,this._host=host,target!==null)this._targets.add(target??host);if(this._config=config,this._skipInitial=skipInitial??this._skipInitial,this.callback=callback,isServer)return;if(!window.MutationObserver){console.warn("MutationController error: browser does not support MutationObserver.");return}this._observer=new MutationObserver((records)=>{this.handleChanges(records),this._host.requestUpdate()}),host.addController(this)}handleChanges(records){this.value=this.callback?.(records,this._observer)}hostConnected(){for(let target of this._targets)this.observe(target)}hostDisconnected(){this.disconnect()}async hostUpdated(){let pendingRecords=this._observer.takeRecords();if(pendingRecords.length||!this._skipInitial&&this._unobservedUpdate)this.handleChanges(pendingRecords);this._unobservedUpdate=!1}observe(target){this._targets.add(target),this._observer.observe(target,this._config),this._unobservedUpdate=!0,this._host.requestUpdate()}disconnect(){this._observer.disconnect()}}var generateMap=(list,start,end)=>{let map=new Map;for(let i=start;i<=end;i++)map.set(list[i],i);return map};class RepeatDirective extends Directive{constructor(partInfo){super(partInfo);if(partInfo.type!==PartType.CHILD)throw Error("repeat() can only be used in text expressions")}_getValuesAndKeys(items,keyFnOrTemplate,template){let keyFn;if(template===void 0)template=keyFnOrTemplate;else if(keyFnOrTemplate!==void 0)keyFn=keyFnOrTemplate;let keys=[],values=[],index=0;for(let item of items)keys[index]=keyFn?keyFn(item,index):index,values[index]=template(item,index),index++;return{values,keys}}render(items,keyFnOrTemplate,template){return this._getValuesAndKeys(items,keyFnOrTemplate,template).values}update(containerPart,[items,keyFnOrTemplate,template]){let oldParts=getCommittedValue(containerPart),{values:newValues,keys:newKeys}=this._getValuesAndKeys(items,keyFnOrTemplate,template);if(!Array.isArray(oldParts))return this._itemKeys=newKeys,newValues;let oldKeys=this._itemKeys??=[],newParts=[],newKeyToIndexMap,oldKeyToIndexMap,oldHead=0,oldTail=oldParts.length-1,newHead=0,newTail=newValues.length-1;while(oldHead<=oldTail&&newHead<=newTail)if(oldParts[oldHead]===null)oldHead++;else if(oldParts[oldTail]===null)oldTail--;else if(oldKeys[oldHead]===newKeys[newHead])newParts[newHead]=setChildPartValue(oldParts[oldHead],newValues[newHead]),oldHead++,newHead++;else if(oldKeys[oldTail]===newKeys[newTail])newParts[newTail]=setChildPartValue(oldParts[oldTail],newValues[newTail]),oldTail--,newTail--;else if(oldKeys[oldHead]===newKeys[newTail])newParts[newTail]=setChildPartValue(oldParts[oldHead],newValues[newTail]),insertPart(containerPart,newParts[newTail+1],oldParts[oldHead]),oldHead++,newTail--;else if(oldKeys[oldTail]===newKeys[newHead])newParts[newHead]=setChildPartValue(oldParts[oldTail],newValues[newHead]),insertPart(containerPart,oldParts[oldHead],oldParts[oldTail]),oldTail--,newHead++;else{if(newKeyToIndexMap===void 0)newKeyToIndexMap=generateMap(newKeys,newHead,newTail),oldKeyToIndexMap=generateMap(oldKeys,oldHead,oldTail);if(!newKeyToIndexMap.has(oldKeys[oldHead]))removePart(oldParts[oldHead]),oldHead++;else if(!newKeyToIndexMap.has(oldKeys[oldTail]))removePart(oldParts[oldTail]),oldTail--;else{let oldIndex=oldKeyToIndexMap.get(newKeys[newHead]),oldPart=oldIndex!==void 0?oldParts[oldIndex]:null;if(oldPart===null){let newPart=insertPart(containerPart,oldParts[oldHead]);setChildPartValue(newPart,newValues[newHead]),newParts[newHead]=newPart}else newParts[newHead]=setChildPartValue(oldPart,newValues[newHead]),insertPart(containerPart,oldParts[oldHead],oldPart),oldParts[oldIndex]=null;newHead++}}while(newHead<=newTail){let newPart=insertPart(containerPart,newParts[newTail+1]);setChildPartValue(newPart,newValues[newHead]),newParts[newHead++]=newPart}while(oldHead<=oldTail){let oldPart=oldParts[oldHead++];if(oldPart!==null)removePart(oldPart)}return this._itemKeys=newKeys,setCommittedValue(containerPart,newParts),noChange}}var repeat=directive(RepeatDirective);var s=class extends Error{constructor(e,n){super(n+"");this.status=e,this.value=n}},i=/(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))/,o=/(?:Sun|Mon|Tue|Wed|Thu|Fri|Sat)\s(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s\d{2}\s\d{4}\s\d{2}:\d{2}:\d{2}\sGMT(?:\+|-)\d{4}\s\([^)]+\)/,c=/^(?:(?:(?:(?:0?[1-9]|[12][0-9]|3[01])[/\s-](?:0?[1-9]|1[0-2])[/\s-](?:19|20)\d{2})|(?:(?:19|20)\d{2}[/\s-](?:0?[1-9]|1[0-2])[/\s-](?:0?[1-9]|[12][0-9]|3[01]))))(?:\s(?:1[012]|0?[1-9]):[0-5][0-9](?::[0-5][0-9])?(?:\s[AP]M)?)?$/,u=(t)=>t.trim().length!==0&&!Number.isNaN(Number(t)),d2=(t)=>{if(typeof t!="string")return null;let r=t.replace(/"/g,"");if(i.test(r)||o.test(r)||c.test(r)){let e=new Date(r);if(!Number.isNaN(e.getTime()))return e}return null},a=(t)=>{let r=t.charCodeAt(0),e=t.charCodeAt(t.length-1);return r===123&&e===125||r===91&&e===93},p=(t)=>JSON.parse(t,(r,e)=>{return d2(e)||e}),g=(t)=>{if(!t)return t;if(u(t))return+t;if(t==="true")return!0;if(t==="false")return!1;let r=d2(t);if(r)return r;if(a(t))try{return p(t)}catch{}return t},S=(t)=>{let r=t.data.toString();return r==="null"?null:g(r)};var F=class{constructor(t){this.url=t,this.ws=new WebSocket(t)}ws;send(t){return Array.isArray(t)?(t.forEach((n)=>this.send(n)),this):(this.ws.send(typeof t=="object"?JSON.stringify(t):t.toString()),this)}on(t,n,s2){return this.addEventListener(t,n,s2)}off(t,n,s2){return this.ws.removeEventListener(t,n,s2),this}subscribe(t,n){return this.addEventListener("message",t,n)}addEventListener(t,n,s2){return this.ws.addEventListener(t,(f)=>{if(t==="message"){let o2=S(f);n({...f,data:o2})}else n(f)},s2),this}removeEventListener(t,n,s2){return this.off(t,n,s2),this}close(){return this.ws.close(),this}},J=["get","post","put","delete","patch","options","head","connect","subscribe"],D=["localhost","127.0.0.1","0.0.0.0"],K=typeof FileList>"u",I=(e)=>K?e instanceof Blob:e instanceof FileList||e instanceof File,P=(e)=>{if(!e)return!1;for(let t in e)if(I(e[t])||Array.isArray(e[t])&&e[t].find(I))return!0;return!1},C=(e)=>K?e:new Promise((t)=>{let n=new FileReader;n.onload=()=>{let s2=new File([n.result],e.name,{lastModified:e.lastModified,type:e.type});t(s2)},n.readAsArrayBuffer(e)}),b=(e,t,n={},s2={})=>{if(Array.isArray(e)){for(let f of e)if(!Array.isArray(f))s2=b(f,t,n,s2);else{let o2=f[0];if(typeof o2=="string")s2[o2.toLowerCase()]=f[1];else for(let[i2,h]of o2)s2[i2.toLowerCase()]=h}return s2}if(!e)return s2;switch(typeof e){case"function":if(e instanceof Headers)return b(e,t,n,s2);let f=e(t,n);return f?b(f,t,n,s2):s2;case"object":if(e instanceof Headers)return e.forEach((o2,i2)=>{s2[i2.toLowerCase()]=o2}),s2;for(let[o2,i2]of Object.entries(e))s2[o2.toLowerCase()]=i2;return s2;default:return s2}};async function*U(e){let t=e.body;if(!t)return;let n=t.getReader(),s2=new TextDecoder;try{for(;;){let{done:f,value:o2}=await n.read();if(f)break;let i2=typeof o2=="string"?o2:s2.decode(o2);i2.includes(`
 
 `)?yield*_(i2):yield g(i2)}}finally{n.releaseLock()}}function*_(e){let t=e.split(`
 
 `);for(let n of t){if(n.indexOf(":")<=0){n&&(yield g(n));continue}let s2=n.split(`
-`),f={};for(let o2 of s2){let i2=o2.indexOf(":");if(i2>0){let h=o2.slice(0,i2).trim(),L=o2.slice(i2+1).trim();f[h]=g(L)}}yield f}}var x=(e,t,n=[],s2)=>new Proxy(()=>{},{get(f,o2){return x(e,t,o2==="index"?n:[...n,o2],s2)},apply(f,o2,[i2,h]){if(!i2||h||typeof i2=="object"&&Object.keys(i2).length!==1||J.includes(n.at(-1))){let L=[...n],k=L.pop(),v="/"+L.join("/"),{fetcher:N=fetch,headers:R,onRequest:g2,onResponse:E,fetch:H}=t,m=k==="get"||k==="head"||k==="subscribe";R=b(R,v,h);let T=m?i2?.query:h?.query,O="";if(T){let r=(w,u2)=>{O+=(O?"&":"?")+`${encodeURIComponent(w)}=${encodeURIComponent(u2)}`};for(let[w,u2]of Object.entries(T)){if(Array.isArray(u2)){for(let y of u2)r(w,y);continue}if(u2!=null){if(typeof u2=="object"){r(w,JSON.stringify(u2));continue}r(w,`${u2}`)}}}if(k==="subscribe"){let r=e.replace(/^([^]+):\/\//,e.startsWith("https://")?"wss://":e.startsWith("http://")||D.find((w)=>e.includes(w))?"ws://":"wss://")+v+O;return new F(r)}return(async()=>{let r={method:k?.toUpperCase(),body:i2,...H,headers:R};r.headers={...R,...b(m?i2?.headers:h?.headers,v,r)};let w=m&&typeof i2=="object"?i2.fetch:h?.fetch;if(r={...r,...w},m&&delete r.body,g2){Array.isArray(g2)||(g2=[g2]);for(let l of g2){let a2=await l(v,r);typeof a2=="object"&&(r={...r,...a2,headers:{...r.headers,...b(a2.headers,v,r)}})}}if(m&&delete r.body,P(i2)){let l=new FormData;for(let[a2,c2]of Object.entries(r.body)){if(Array.isArray(c2)){for(let d3=0;d3<c2.length;d3++){let j=c2[d3];l.append(a2,j instanceof File?await C(j):j)}continue}if(K){if(Array.isArray(c2))for(let d3 of c2)l.append(a2,d3);else l.append(a2,c2);continue}if(c2 instanceof File){l.append(a2,await C(c2));continue}if(c2 instanceof FileList){for(let d3=0;d3<c2.length;d3++)l.append(a2,await C(c2[d3]));continue}l.append(a2,c2)}r.body=l}else typeof i2=="object"?(r.headers["content-type"]="application/json",r.body=JSON.stringify(i2)):i2!=null&&(r.headers["content-type"]="text/plain");if(m&&delete r.body,g2){Array.isArray(g2)||(g2=[g2]);for(let l of g2){let a2=await l(v,r);typeof a2=="object"&&(r={...r,...a2,headers:{...r.headers,...b(a2.headers,v,r)}})}}h?.headers?.["content-type"]&&(r.headers["content-type"]=h?.headers["content-type"]);let u2=e+v+O,y=await(s2?.handle(new Request(u2,r))??N(u2,r)),p2=null,S2=null;if(E){Array.isArray(E)||(E=[E]);for(let l of E)try{let a2=await l(y.clone());if(a2!=null){p2=a2;break}}catch(a2){a2 instanceof s?S2=a2:S2=new s(422,a2);break}}if(p2!==null)return{data:p2,error:S2,response:y,status:y.status,headers:y.headers};switch(y.headers.get("Content-Type")?.split(";")[0]){case"text/event-stream":p2=U(y);break;case"application/json":p2=JSON.parse(await y.text(),(a2,c2)=>{if(typeof c2!="string")return c2;return d2(c2)||c2});break;case"application/octet-stream":p2=await y.arrayBuffer();break;case"multipart/form-data":let l=await y.formData();p2={},l.forEach((a2,c2)=>{p2[c2]=a2});break;default:p2=await y.text().then(g)}return(y.status>=300||y.status<200)&&(S2=new s(y.status,p2),p2=null),{data:p2,error:S2,response:y,status:y.status,headers:y.headers}})()}return typeof i2=="object"?x(e,t,[...n,Object.values(i2)[0]],s2):x(e,t,n)}}),Q=(e,t={})=>typeof e=="string"?(t.keepDomain||(e.includes("://")||(e=(D.find((n)=>e.includes(n))?"http://":"https://")+e),e.endsWith("/")&&(e=e.slice(0,-1))),x(e,t)):(typeof window<"u"&&console.warn("Elysia instance server found on client side, this is not recommended for security reason. Use generic type instead."),x("http://e.ly",t,[],e));var api=Q("localhost:3000"),chat,timeFormat=new Intl.DateTimeFormat("fr-FR",{hour:"numeric",minute:"numeric",second:"numeric"});class ChatRoom extends LitElement{constructor(){super(...arguments);this.message="";this.messages=[]}messageRef=createRef();connectedCallback(){super.connectedCallback(),chat=api?.chat.subscribe({query:{roomId:this.roomId}}),chat.subscribe((message)=>{this.messages=this.messages.concat([message.data])});let config={attributes:!0,childList:!0,subtree:!0};new MutationObserver((mutationList,observer2)=>{for(let mutation of mutationList){if(mutation.type!=="childList")return;if(mutation.addedNodes[0].nodeType!==Node.COMMENT_NODE)this.chatScrollable.scrollTo({top:this.chatScrollable.scrollHeight,behavior:"smooth"})}}).observe(this.chatScrollable,config)}disconnectedCallback(){super.disconnectedCallback(),chat.close()}async newMessage(e){e.preventDefault(),chat.send({user:"me",message:this.message,roomId:this.roomId}),this.message="",this.messageRef.value.value=""}timeFormatOf(value){return timeFormat.format(value)}firstUpdated(){this.messageRef.value.focus()}static styles=css`
-  /* --- MAIN CHAT AREA --- */
+`),f={};for(let o2 of s2){let i2=o2.indexOf(":");if(i2>0){let h=o2.slice(0,i2).trim(),L=o2.slice(i2+1).trim();f[h]=g(L)}}yield f}}var x=(e,t,n=[],s2)=>new Proxy(()=>{},{get(f,o2){return x(e,t,o2==="index"?n:[...n,o2],s2)},apply(f,o2,[i2,h]){if(!i2||h||typeof i2=="object"&&Object.keys(i2).length!==1||J.includes(n.at(-1))){let L=[...n],k=L.pop(),v="/"+L.join("/"),{fetcher:N=fetch,headers:R,onRequest:g2,onResponse:E,fetch:H}=t,m=k==="get"||k==="head"||k==="subscribe";R=b(R,v,h);let T=m?i2?.query:h?.query,O="";if(T){let r=(w,u2)=>{O+=(O?"&":"?")+`${encodeURIComponent(w)}=${encodeURIComponent(u2)}`};for(let[w,u2]of Object.entries(T)){if(Array.isArray(u2)){for(let y of u2)r(w,y);continue}if(u2!=null){if(typeof u2=="object"){r(w,JSON.stringify(u2));continue}r(w,`${u2}`)}}}if(k==="subscribe"){let r=e.replace(/^([^]+):\/\//,e.startsWith("https://")?"wss://":e.startsWith("http://")||D.find((w)=>e.includes(w))?"ws://":"wss://")+v+O;return new F(r)}return(async()=>{let r={method:k?.toUpperCase(),body:i2,...H,headers:R};r.headers={...R,...b(m?i2?.headers:h?.headers,v,r)};let w=m&&typeof i2=="object"?i2.fetch:h?.fetch;if(r={...r,...w},m&&delete r.body,g2){Array.isArray(g2)||(g2=[g2]);for(let l of g2){let a2=await l(v,r);typeof a2=="object"&&(r={...r,...a2,headers:{...r.headers,...b(a2.headers,v,r)}})}}if(m&&delete r.body,P(i2)){let l=new FormData;for(let[a2,c2]of Object.entries(r.body)){if(Array.isArray(c2)){for(let d3=0;d3<c2.length;d3++){let j=c2[d3];l.append(a2,j instanceof File?await C(j):j)}continue}if(K){if(Array.isArray(c2))for(let d3 of c2)l.append(a2,d3);else l.append(a2,c2);continue}if(c2 instanceof File){l.append(a2,await C(c2));continue}if(c2 instanceof FileList){for(let d3=0;d3<c2.length;d3++)l.append(a2,await C(c2[d3]));continue}l.append(a2,c2)}r.body=l}else typeof i2=="object"?(r.headers["content-type"]="application/json",r.body=JSON.stringify(i2)):i2!=null&&(r.headers["content-type"]="text/plain");if(m&&delete r.body,g2){Array.isArray(g2)||(g2=[g2]);for(let l of g2){let a2=await l(v,r);typeof a2=="object"&&(r={...r,...a2,headers:{...r.headers,...b(a2.headers,v,r)}})}}h?.headers?.["content-type"]&&(r.headers["content-type"]=h?.headers["content-type"]);let u2=e+v+O,y=await(s2?.handle(new Request(u2,r))??N(u2,r)),p2=null,S2=null;if(E){Array.isArray(E)||(E=[E]);for(let l of E)try{let a2=await l(y.clone());if(a2!=null){p2=a2;break}}catch(a2){a2 instanceof s?S2=a2:S2=new s(422,a2);break}}if(p2!==null)return{data:p2,error:S2,response:y,status:y.status,headers:y.headers};switch(y.headers.get("Content-Type")?.split(";")[0]){case"text/event-stream":p2=U(y);break;case"application/json":p2=JSON.parse(await y.text(),(a2,c2)=>{if(typeof c2!="string")return c2;return d2(c2)||c2});break;case"application/octet-stream":p2=await y.arrayBuffer();break;case"multipart/form-data":let l=await y.formData();p2={},l.forEach((a2,c2)=>{p2[c2]=a2});break;default:p2=await y.text().then(g)}return(y.status>=300||y.status<200)&&(S2=new s(y.status,p2),p2=null),{data:p2,error:S2,response:y,status:y.status,headers:y.headers}})()}return typeof i2=="object"?x(e,t,[...n,Object.values(i2)[0]],s2):x(e,t,n)}}),Q=(e,t={})=>typeof e=="string"?(t.keepDomain||(e.includes("://")||(e=(D.find((n)=>e.includes(n))?"http://":"https://")+e),e.endsWith("/")&&(e=e.slice(0,-1))),x(e,t)):(typeof window<"u"&&console.warn("Elysia instance server found on client side, this is not recommended for security reason. Use generic type instead."),x("http://e.ly",t,[],e));var api=Q("localhost:3000"),timeFormat=new Intl.DateTimeFormat("fr-FR",{hour:"numeric",minute:"numeric",second:"numeric"});class ChatRoom extends LitElement{constructor(){super(...arguments);this.message="";this.messages=[]}chat;chatScrollObserver=new MutationController(this,{config:{attributes:!1,childList:!0,subtree:!1},callback:(mutationList,observer)=>{for(let mutation of mutationList)if(mutation.addedNodes[0].nodeType!==Node.COMMENT_NODE)this.$chatScrollable.scrollTo({top:this.$chatScrollable.scrollHeight,behavior:"smooth"})}});connectedCallback(){super.connectedCallback(),this.chat=api?.chat.subscribe({query:{roomId:this.roomId}}),this.chat.subscribe((message)=>{this.messages=this.messages.concat([message.data])}),this.chatScrollObserver.observe(this.$chatScrollable)}disconnectedCallback(){super.disconnectedCallback(),this.chatScrollObserver.disconnect(),this.chat.close()}async sendNewMessage(e){if(e.preventDefault(),e.target.message===""){e.stopImmediatePropagation();return}this.chat.send({user:"me",message:e.target.message,roomId:this.roomId}),e.target.message=""}timeFormatOf(value){return timeFormat.format(value)}firstUpdated(){this.$newMessage.focus()}static styles=css`
   :host {
     display: contents;
   }
-        .chat-area {
-            flex: 1;
-            background-color: var(--bg-dark-3);
-            display: flex;
-            flex-direction: column;
-            min-width: 0; /* Prevents flex overflow */
-        }
+  .chat-area {
+      flex: 1;
+      background-color: var(--bg-dark-3);
+      display: flex;
+      flex-direction: column;
+      min-width: 0; /* Prevents flex overflow */
+  }
 
-        .chat-header {
-            height: 48px;
-            padding: 0 16px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 1px 0 rgba(4,4,5,0.2);
-            color: var(--text-header);
-            font-weight: bold;
-        }
-        .chat-header span {
-            color: var(--text-muted);
-            margin-right: 8px;
-            font-size: 20px;
-            font-weight: 400;
-        }
+  .chat-header {
+      height: 48px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 1px 0 rgba(4,4,5,0.2);
+      color: var(--text-header);
+      font-weight: bold;
+  }
+  .chat-header span {
+      color: var(--text-muted);
+      margin-right: 8px;
+      font-size: 20px;
+      font-weight: 400;
+  }
 
-        .messages-wrapper {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px 0;
-            display: flex;
-            flex-direction: column;
-        }
+  .messages-wrapper {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+  }
 
-        /* Message Row */
-        .message-row {
-            display: flex;
-            padding: 6px 16px; /* No bubbles, just padding */
-            margin-top: 10px;
-            position: relative;
-        }
+  /* Message Row */
+  .message-row {
+      display: flex;
+      padding: 6px 16px; /* No bubbles, just padding */
+      margin-top: 10px;
+      position: relative;
+  }
 
-        .message-row:hover {
-            background-color: rgba(4, 4, 5, 0.07);
-        }
+  .message-row:hover {
+      background-color: rgba(4, 4, 5, 0.07);
+  }
 
-        .msg-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 16px;
-            flex-shrink: 0;
-            background-size: cover;
-            background-color: #555;
-            cursor: pointer;
-        }
+  .msg-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 16px;
+      flex-shrink: 0;
+      background-size: cover;
+      background-color: #555;
+      cursor: pointer;
+  }
 
-        .msg-content {
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-        }
+  .msg-content {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+  }
 
-        .msg-header {
-            display: flex;
-            align-items: baseline;
-            margin-bottom: 4px;
-        }
+  .msg-header {
+      display: flex;
+      align-items: baseline;
+      margin-bottom: 4px;
+  }
 
-        .username {
-            font-size: 16px;
-            font-weight: 500;
-            margin-right: 8px;
-            cursor: pointer;
-        }
+  .username {
+      font-size: 16px;
+      font-weight: 500;
+      margin-right: 8px;
+      cursor: pointer;
+  }
 
-        .username:hover { text-decoration: underline; }
+  .username:hover { text-decoration: underline; }
 
-        .timestamp {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
+  .timestamp {
+      font-size: 12px;
+      color: var(--text-muted);
+  }
 
-        .msg-text {
-            font-size: 15px;
-            line-height: 1.375rem;
-            color: var(--text-normal);
-            white-space: pre-wrap;
-        }
+  .msg-text {
+      font-size: 15px;
+      line-height: 1.375rem;
+      color: var(--text-normal);
+      white-space: pre-wrap;
+  }
 
-        /* Specific Role Colors from your palette */
-        .role-admin { color: var(--c-pink); }
-        .role-mod { color: var(--c-purple); }
-        .role-user { color: var(--c-bright-blue); }
+  /* Specific Role Colors from your palette */
+  .role-admin { color: var(--c-pink); }
+  .role-mod { color: var(--c-purple); }
+  .role-user { color: var(--c-bright-blue); }
 
-        /* Mention Highlight */
-        .mention {
-            background-color: rgba(21, 93, 252, 0.1); /* Bright Blue low opacity */
-            color: #AAB9FF;
-            border-radius: 3px;
-            padding: 0 2px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.1s;
-        }
-        .mention:hover {
-            background-color: rgba(21, 93, 252, 0.3);
-            color: white;
-        }
+  /* Mention Highlight */
+  .mention {
+      background-color: rgba(21, 93, 252, 0.1); /* Bright Blue low opacity */
+      color: #AAB9FF;
+      border-radius: 3px;
+      padding: 0 2px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.1s;
+  }
+  .mention:hover {
+      background-color: rgba(21, 93, 252, 0.3);
+      color: white;
+  }
 
-        /* Full Message Highlight (e.g. when mentioned) */
-        .message-row.mentioned {
-            background-color: rgba(251, 100, 182, 0.1); /* Pink tint */
-            border-left: 2px solid var(--c-pink);
-            padding-left: 14px; /* Adjust for border */
-        }
+  /* Full Message Highlight (e.g. when mentioned) */
+  .message-row.mentioned {
+      background-color: rgba(251, 100, 182, 0.1); /* Pink tint */
+      border-left: 2px solid var(--c-pink);
+      padding-left: 14px; /* Adjust for border */
+  }
 
-        /* New Message Divider */
-        .divider {
-            margin: 20px 16px;
-            border-top: 1px solid var(--c-pink);
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .divider span {
-            background-color: var(--bg-dark-3);
-            color: var(--text-muted);
-            font-size: 12px;
-            padding: 0 10px;
-            font-weight: 700;
-            color: var(--c-pink);
-            position: absolute;
-            top: -9px;
-        }
+  /* New Message Divider */
+  .divider {
+      margin: 20px 16px;
+      border-top: 1px solid var(--c-pink);
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  .divider span {
+      background-color: var(--bg-dark-3);
+      color: var(--text-muted);
+      font-size: 12px;
+      padding: 0 10px;
+      font-weight: 700;
+      color: var(--c-pink);
+      position: absolute;
+      top: -9px;
+  }
 
-        /* --- INPUT AREA --- */
-        .input-container {
-            padding: 0 16px 24px 16px;
-            background-color: var(--bg-dark-3);
-        }
+  /* --- INPUT AREA --- */
+  .input-container {
+      padding: 0 16px 24px 16px;
+      background-color: var(--bg-dark-3);
+  }
 
-        .input-box {
-            background-color: var(--bg-dark-4);
-            border-radius: 8px;
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-        }
+  .input-box {
+      background-color: var(--bg-dark-4);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+  }
 
-        .plus-icon {
-            color: var(--text-muted);
-            margin-right: 16px;
-            cursor: pointer;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--text-muted);
-            color: var(--bg-dark-4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        .plus-icon:hover { color: var(--text-header); }
+  .plus-icon {
+      color: var(--text-muted);
+      margin-right: 16px;
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      color: var(--bg-dark-4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+  }
+  .plus-icon:hover { color: var(--text-header); }
 
-        .chat-input {
-            background: transparent;
-            border: none;
-            color: var(--text-normal);
-            flex: 1;
-            outline: none;
-            font-size: 15px;
-        }
+  .chat-input {
+      background: transparent;
+      border: none;
+      color: var(--text-normal);
+      flex: 1;
+      outline: none;
+      font-size: 15px;
+  }
 
-        /* Icons on right of input */
-        .input-icons {
-            display: flex;
-            gap: 12px;
-            color: var(--text-muted);
-            font-size: 20px;
-        }
-        .input-icons span { cursor: pointer; }
-        .input-icons span:hover { color: var(--text-header); }
+  /* Icons on right of input */
+  .input-icons {
+      display: flex;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 20px;
+  }
+  .input-icons span { cursor: pointer; }
+  .input-icons span:hover { color: var(--text-header); }
   `;render(){return html`
       <main class="chat-area">
         <div class="chat-header">
@@ -237,18 +236,109 @@ Please use the static 'html' tag function. See https://lit.dev/docs/templates/ex
           `)}
         </div>
 
-        <form @submit=${this.newMessage} class="input-container">
+        <form @submit=${this.sendNewMessage} class="input-container">
           <div class="input-box">
-            <input 
-              ${ref(this.messageRef)} 
+            <input id="new-message"
               @change=${(e)=>this.message=e.target.value}
               type="text" class="chat-input" placeholder="Message #general">
             <div class="input-icons">
-              <button type='submit' @click=${this.newMessage}>🚀</button>
+              <button type='submit' @click=${this.sendNewMessage}>🚀</button>
               <span>🤯</span>
               <span>💀</span>
             </div>
           </div>
         </form>
+        <chat-form @click=${this.sendNewMessage} .roomId=${this.roomId}></chat-form>
     </main>
-    `}}__legacyDecorateClassTS([query("#chat-scrollable"),__legacyMetadataTS("design:type",typeof HTMLElement==="undefined"?Object:HTMLElement)],ChatRoom.prototype,"chatScrollable",void 0),__legacyDecorateClassTS([property({type:String}),__legacyMetadataTS("design:type",String)],ChatRoom.prototype,"message",void 0),__legacyDecorateClassTS([property({type:String,reflect:!0}),__legacyMetadataTS("design:type",String)],ChatRoom.prototype,"roomId",void 0),__legacyDecorateClassTS([state(),__legacyMetadataTS("design:type",typeof Array==="undefined"?Object:Array)],ChatRoom.prototype,"messages",void 0),ChatRoom=__legacyDecorateClassTS([customElement("chat-room")],ChatRoom);
+    `}}__legacyDecorateClassTS([query("#chat-scrollable"),__legacyMetadataTS("design:type",typeof HTMLElement==="undefined"?Object:HTMLElement)],ChatRoom.prototype,"$chatScrollable",void 0),__legacyDecorateClassTS([query("#new-message"),__legacyMetadataTS("design:type",typeof HTMLInputElement==="undefined"?Object:HTMLInputElement)],ChatRoom.prototype,"$newMessage",void 0),__legacyDecorateClassTS([query("chat-form"),__legacyMetadataTS("design:type",Object)],ChatRoom.prototype,"$chatForm",void 0),__legacyDecorateClassTS([property({type:String}),__legacyMetadataTS("design:type",String)],ChatRoom.prototype,"message",void 0),__legacyDecorateClassTS([property({type:String,reflect:!0}),__legacyMetadataTS("design:type",String)],ChatRoom.prototype,"roomId",void 0),__legacyDecorateClassTS([state(),__legacyMetadataTS("design:type",typeof Array==="undefined"?Object:Array)],ChatRoom.prototype,"messages",void 0),ChatRoom=__legacyDecorateClassTS([customElement("chat-room")],ChatRoom);class ChatForm extends LitElement{constructor(){super(...arguments);this.message=""}async sendNewMessage(e){if(this.message===""){e.stopImmediatePropagation();return}e.preventDefault(),this.$newMessage.value=""}render(){return html`<form @submit=${this.sendNewMessage} class="input-container">
+      <div class="input-area">
+          <div class="input-wrapper" id="main-input-box">
+              <input type="text" class="message-input" id="msg-input" placeholder="Message #nightfox-theme">
+              <div class="input-icons">
+                  <span>GIF</span>
+                  <span>☺</span>
+              </div>
+          </div>
+      </div>
+      <!--<div class="input-box">
+        <input id="new-message"
+          @change=${(e)=>this.message=e.target.value}
+          type="text" class="chat-input" placeholder="Message #general">
+        <div class="input-icons">
+          <button type='submit' @click=${this.sendNewMessage}>🚀</button>
+          <span>🤯</span>
+          <span>💀</span>
+        </div>
+      </div>-->
+    </form>`}static styles=css`
+    /* --- Input Area --- */
+    .input-area {
+        padding: 20px 25px 30px 25px;
+        background-color: var(--theme-bg);
+        flex-shrink: 0;
+        /* SEPARATOR LINE REQUESTED */
+        border-top: 1px solid var(--theme-border);
+    }
+
+    .input-wrapper {
+        position: relative;
+        background-color: var(--theme-surface); /* Darker block */
+        border-radius: 8px;
+        padding: 0 15px;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+
+    .message-input {
+        width: 100%;
+        background: transparent;
+        border: none;
+        padding: 15px 0;
+        color: var(--theme-text-header);
+        font-family: var(--font-content);
+        font-size: 1rem;
+        outline: none;
+    }
+
+    .message-input::placeholder {
+        color: var(--theme-text-muted);
+    }
+
+    /* Input Interactions */
+    .input-wrapper:hover {
+        border-color: rgba(209, 105, 131, 0.5); /* Pinkish alpha */
+        box-shadow: 0 0 10px rgba(209, 105, 131, 0.1);
+    }
+
+    .input-wrapper:focus-within {
+        border-color: var(--accent-cyan);
+        box-shadow: 0 0 15px rgba(99, 205, 207, 0.2);
+        background-color: var(--theme-surface-hover);
+    }
+
+    @keyframes urgentPulse {
+        0% { box-shadow: 0 0 0 rgba(0,0,0,0); border-color: transparent; }
+        50% { box-shadow: 0 0 15px var(--accent-pink); border-color: var(--accent-pink); }
+        100% { box-shadow: 0 0 0 rgba(0,0,0,0); border-color: transparent; }
+    }
+
+    .input-wrapper.pulse-active {
+        animation: urgentPulse 2s infinite;
+    }
+
+    .input-icons {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        gap: 15px;
+        color: var(--theme-text-muted);
+        cursor: pointer;
+    }
+
+    .input-icons span:hover {
+        color: var(--accent-yellow);
+    }
+  `}__legacyDecorateClassTS([query("#new-message"),__legacyMetadataTS("design:type",typeof HTMLInputElement==="undefined"?Object:HTMLInputElement)],ChatForm.prototype,"$newMessage",void 0),__legacyDecorateClassTS([property({type:String,reflect:!0,attribute:!0}),__legacyMetadataTS("design:type",String)],ChatForm.prototype,"message",void 0),__legacyDecorateClassTS([property({type:String}),__legacyMetadataTS("design:type",String)],ChatForm.prototype,"roomId",void 0),ChatForm=__legacyDecorateClassTS([customElement("chat-form")],ChatForm);class SigninForm extends LitElement{connectedCallback(){super.connectedCallback(),window.onGoogleLibraryLoad=()=>{this.setupGoogleAuth()}}setupGoogleAuth(){globalThis.google.accounts.id.initialize({client_id:"936754708086-4motrn01ufkc2fh5c90hkavvlobj9b71.apps.googleusercontent.com",callback:this.handleCredentialResponse.bind(this),auto_select:!0,cancel_on_tap_outside:!0,color_scheme:"dark"}),globalThis.google.accounts.id.renderButton(this.socialGoogle,{theme:"outline",size:"large",shape:"pill"}),globalThis.google.accounts.id.prompt()}handleCredentialResponse(response){console.log("Encoded JWT ID token: "+response.credential)}render(){return html`
+      <div id="social-google"></div>`}}__legacyDecorateClassTS([query("#social-google"),__legacyMetadataTS("design:type",typeof HTMLButtonElement==="undefined"?Object:HTMLButtonElement)],SigninForm.prototype,"socialGoogle",void 0),__legacyDecorateClassTS([property({type:Object}),__legacyMetadataTS("design:type",Object)],SigninForm.prototype,"auth2",void 0),SigninForm=__legacyDecorateClassTS([customElement("signin-form")],SigninForm);

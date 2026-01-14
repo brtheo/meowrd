@@ -16,14 +16,15 @@
     "emitDecoratorMetadata": true,
     "useDefineForClassFields": false,
     "target": "es2022",
-    "module": "ESNext",    
-    "moduleResolution": "bundler",                       
-    "strictPropertyInitialization": false,               
-    "types": ["bun-types"],                                      
-    "esModuleInterop": true,                             
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strictPropertyInitialization": false,
+
+    "types": ["bun-types"],
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "alwaysStrict": true,            
-    "strict": true,                                 
+    "alwaysStrict": true,
+    "strict": true,
     "skipLibCheck": true,
     "paths": {
       "@/*": ["./src/*"],
@@ -31,6 +32,6 @@
       "@features/*": ["./src/features/*"],
       "@conf/*": ["./src/conf/*"],
       "@web/*": ["./src/web/*"],
-    }
-  }
+    },
+  },
 }

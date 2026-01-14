@@ -6,7 +6,20 @@ import { context } from '@conf/ctx';
 import serverActions from './lib/actionEndpoints'
 import { chat } from '@features/chat/chat';
 
+import {ConvexClient} from "convex/browser";
+import {api} from "../convex/_generated/api.js";
+
 await build()
+
+const client = new ConvexClient(process.env["CONVEX_URL"]);
+
+const unsubscribe = client.onUpdate(api.tasks.get, {}, async (tasks) => {
+  console.log(tasks);
+});
+
+await Bun.sleep(1000);
+unsubscribe();
+await client.close();
 
 const app = new Elysia()
 	.use(staticPlugin())
@@ -15,6 +28,7 @@ const app = new Elysia()
 	.use(serverActions)
 	.get('/', (ctx) => {
 		return ctx.html`
+		  <signin-form></signin-form>
 			<h1>hello world oui je fais</h1>
 			<create-room></create-room>
 		`
