@@ -19,7 +19,6 @@ export class ChatRoom extends LitElement {
   private chat;
 
   @query('#chat-scrollable') private $chatScrollable: HTMLElement;
-  @query('#new-message') private $newMessage: HTMLInputElement;
   @query('chat-form') private $chatForm;
 
   @property({type: String}) private message: string = '';
@@ -58,6 +57,7 @@ export class ChatRoom extends LitElement {
   }
 
   private async sendNewMessage(e: SubmitEvent) {
+
     e.preventDefault();
     if(e.target.message === '') {
       e.stopImmediatePropagation();
@@ -68,7 +68,13 @@ export class ChatRoom extends LitElement {
       message: e.target.message,
       roomId: this.roomId
     })
+
+    console.log(this.$chatForm.message)
+    console.log(e.target.message)
+    this.$chatForm.message = '';
     e.target.message = '';
+    console.log(this.$chatForm.message)
+    console.log(e.target.message)
   }
 
   timeFormatOf(value: number) {
@@ -76,7 +82,7 @@ export class ChatRoom extends LitElement {
   }
 
   firstUpdated() {
-    this.$newMessage.focus();
+    this.$chatForm.focus();
   }
 
   static styles = css`
@@ -290,19 +296,6 @@ export class ChatRoom extends LitElement {
             </div>
           `)}
         </div>
-
-        <form @submit=${this.sendNewMessage} class="input-container">
-          <div class="input-box">
-            <input id="new-message"
-              @change=${e => this.message = e.target.value}
-              type="text" class="chat-input" placeholder="Message #general">
-            <div class="input-icons">
-              <button type='submit' @click=${this.sendNewMessage}>🚀</button>
-              <span>🤯</span>
-              <span>💀</span>
-            </div>
-          </div>
-        </form>
         <chat-form @click=${this.sendNewMessage} .roomId=${this.roomId}></chat-form>
     </main>
     `

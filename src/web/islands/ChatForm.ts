@@ -4,7 +4,7 @@ import { customElement, property, state, query } from 'lit/decorators.js';
 @customElement('chat-form')
 export class ChatForm extends LitElement {
 
-  @query('#new-message') private $newMessage: HTMLInputElement;
+  @query('#msg-input') public $newMessage: HTMLInputElement;
 
   @property({type: String, reflect: true, attribute: true}) message: string = '';
   @property({type: String}) roomId: string;
@@ -14,31 +14,23 @@ export class ChatForm extends LitElement {
       e.stopImmediatePropagation();
       return;
     }
+    debugger;
     e.preventDefault();
     this.$newMessage.value = '';
   }
 
   override render() {
-    return html`<form @submit=${this.sendNewMessage} class="input-container">
+    return html`<form class="input-container">
       <div class="input-area">
           <div class="input-wrapper" id="main-input-box">
-              <input type="text" class="message-input" id="msg-input" placeholder="Message #nightfox-theme">
+              <input type="text" class="message-input" .value=${this.message} id="msg-input" placeholder="Message #nightfox-theme" @change=${e => {this.message = e.target.value;console.log(e.target.value)}}>
               <div class="input-icons">
                   <span>GIF</span>
                   <span>☺</span>
               </div>
+            <button type='submit'>Envoyer</button>
           </div>
       </div>
-      <!--<div class="input-box">
-        <input id="new-message"
-          @change=${e => this.message = e.target.value}
-          type="text" class="chat-input" placeholder="Message #general">
-        <div class="input-icons">
-          <button type='submit' @click=${this.sendNewMessage}>🚀</button>
-          <span>🤯</span>
-          <span>💀</span>
-        </div>
-      </div>-->
     </form>`;
   }
   static styles = css`

@@ -9,6 +9,7 @@ export default defineSchema({
     lastLoggedInAt: v.float64(),
     provider: v.string(),
     username: v.string(),
+    providerId: v.optional(v.string())
   }),
   tasks: defineTable({
      isCompleted: v.boolean(),
